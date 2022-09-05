@@ -54,20 +54,27 @@ public class UserController {
 
     @RequestMapping(value = "/logUser", method = RequestMethod.GET)
     public void check(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException {
-        String username = request.getParameter("username");//这里的username就是reg.html上用户名输入框的名字(name属性指定的)
+        String username = request.getParameter("username");
         String password = request.getParameter("pwd");
-        File dir = new File("./users");
-        if (dir.isDirectory()) {
+        if (username.length()<=0) {
+            //用户名为空
+            System.out.println("username is null!!");
+        } else {
+            File dir = new File("./users");
+
             FileFilter filter = new FileFilter() {
                 @Override
                 public boolean accept(File file) {
                     String name = file.getName();
-                    return name.contains(username);
+                    return name.contains(username + ".obj");
                 }
             };
-            File[] list = dir.listFiles(filter);
-            if (list.length > 0) {
-                FileInputStream fis = new FileInputStream(list[0]);
+            File[] lists = dir.listFiles(filter);
+            for (File list : lists) {
+                System.out.println(list);
+            }
+            if (lists.length > 0) {
+                FileInputStream fis = new FileInputStream(lists[0]);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 User user = (User) ois.readObject();
                 ois.close();
@@ -75,12 +82,15 @@ public class UserController {
                 if (user.getPassword().equals(password)) {
                     response.setStatus(200);
                     System.out.println(response.getStatus());
-//                response.sendRedirect("/reg_success.html");
-                }else {
+                    response.sendRedirect("/reg_success.html");
+                } else {
                     //密码错误
+                    System.out.println("Password error!");
                 }
-            }else{
+            } else {
                 //用户不存在
+                System.out.println("User not exist!");
+
             }
 
         }
