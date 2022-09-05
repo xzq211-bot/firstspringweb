@@ -10,11 +10,11 @@
 </head>
 
 <body>
-<form action="./index.html" class="login_box" method="post">
+<form action="/logUser" class="login_box" method="get">
     <h1>DarkMoon</h1>
-    <input type="text" class="input_box" placeholder="账号">
-    <input type="password" class="input_box" placeholder="密码">
-    <input type="submit" class="btn" value="登录">
+    <input type="text" class="input_box" name="username" placeholder="账号">
+    <input type="password" class="input_box" name="pwd" placeholder="密码">
+    <input type="submit" onclick="" class="btn" value="登录">
     <button class="btn" onclick="show_reg()">注册</button>
 </form>
 <script>
@@ -22,6 +22,10 @@
         alert("即将跳转到注册页面")
         window.open("reg.html")
     }
+    function login(){
+
+    }
+
 </script>
 </body>
 </html>
