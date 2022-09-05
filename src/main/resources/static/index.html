@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<form action="./index.html" class="login_box" method="post">
+    <h1>DarkMoon</h1>
+    <input type="text" class="input_box" placeholder="账号">
+    <input type="password" class="input_box" placeholder="密码">
+    <input type="submit" class="btn" value="登录">
+    <button class="btn" onclick="show_reg()">注册</button>
+</form>
+<script>
+    function show_reg(){
+        alert("即将跳转到注册页面")
+        window.open("reg.html")
+    }
+</script>
+</body>
+</html>
