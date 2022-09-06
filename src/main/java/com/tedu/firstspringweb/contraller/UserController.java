@@ -17,6 +17,7 @@ public class UserController {
     private static File userDir;//用来表示存放所有用户信息的目录
 
     static {
+        //
         userDir = new File("./users");
         if (!userDir.exists()) {
             userDir.mkdirs();
@@ -54,8 +55,8 @@ public class UserController {
 
     @RequestMapping(value = "/logUser", method = RequestMethod.GET)
     public void check(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("pwd");
+        String username = request.getParameter("username");//获取前台传入的数据（username）    根据标签name获取
+        String password = request.getParameter("pwd");//获取前台传入的数据（password）         根据标签name获取
         if (username.length()<=0) {
             //用户名为空
             System.out.println("username is null!!");
@@ -70,19 +71,22 @@ public class UserController {
                 }
             };
             File[] lists = dir.listFiles(filter);
-            for (File list : lists) {
-                System.out.println(list);
-            }
+            //将过滤出符合条件的用户名存入数组
+//            for (File list : lists) {
+//                System.out.println(list);
+//            }
+            //根据数组长度是否大于0判断用户是否存在       这里面数组长度只存在两种可能0或1
             if (lists.length > 0) {
+                //将obj对象反序列化存入user中
                 FileInputStream fis = new FileInputStream(lists[0]);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 User user = (User) ois.readObject();
                 ois.close();
                 System.out.println(user);
                 if (user.getPassword().equals(password)) {
-                    response.setStatus(200);
-                    System.out.println(response.getStatus());
-                    response.sendRedirect("/reg_success.html");
+//                    response.setStatus(200);
+//                    System.out.println(response.getStatus());
+                    response.sendRedirect("/reg_success.html");     //重定向到登录成功页面
                 } else {
                     //密码错误
                     System.out.println("Password error!");

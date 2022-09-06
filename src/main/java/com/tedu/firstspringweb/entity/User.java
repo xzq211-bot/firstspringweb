@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * 使用当前类实例表示一个注册用户
  */
+//Serializable签名接口序列化
 public class User implements Serializable {
     private String username;
     private String password;
